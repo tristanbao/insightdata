@@ -34,43 +34,18 @@ jobs:
           hugo-version: '0.110.0'
           extended: true
 
-      - name: Setup Pages
-        id: pages
-        uses: actions/configure-pages@v4
-
-      - name: Check theme
-        run: |
-          echo "Checking theme directory..."
-          ls -la themes/
-          echo "Checking tella theme..."
-          ls -la themes/tella/
-          echo "Checking layouts..."
-          ls -la themes/tella/layouts/
-
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Starting Hugo build..."
-          pwd
-          echo "Current directory contents:"
-          ls -la
-          echo "Theme contents:"
-          ls -la themes/tella/
-          echo "Theme layouts:"
-          ls -la themes/tella/layouts/
-          echo "Content directory:"
-          ls -la content/
-          echo "Running Hugo with verbose output..."
-          HUGO_LOG_LEVEL=debug hugo --verbose --debug \
-            --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/" 2>&1 | tee hugo.log
-          echo "Hugo log file contents:"
-          cat hugo.log
-          echo "Build complete. Checking public directory:"
-          ls -la public/
+          hugo version
+          echo "Checking theme directory:"
+          ls -la themes/tella
+          echo "Building site..."
+          HUGO_LOG_LEVEL=debug hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
-      - name: Upload Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
