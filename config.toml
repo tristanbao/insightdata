@@ -2,7 +2,7 @@
 timeout = "60s"
 
 #baseURL = "http://localhost:1313/"
-baseURL = "https://tristanbao.github.io/insigtdata/"
+baseURL = "https://tristanbao.github.io/insightdata/"
 title = "Insight Data Enterprise Consulting"
 author = "Insight Data"
 languageCode = "zh-cn"
