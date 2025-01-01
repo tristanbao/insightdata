@@ -33,7 +33,7 @@ hasCJKLanguage = true
 
     # The size parameter is the class name of tailwindcss
     # https://tailwindcss.com/
-    size = "h-14"
+    size = "h-12"
 
   [params.site]
     name = "Insight Data"
