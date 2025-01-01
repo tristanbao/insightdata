@@ -34,14 +34,27 @@ jobs:
           hugo-version: '0.110.0'
           extended: true
 
+      - name: Check theme
+        run: |
+          echo "Checking theme directory..."
+          ls -la themes/
+          echo "Checking tella theme..."
+          ls -la themes/tella/
+          echo "Checking layouts..."
+          ls -la themes/tella/layouts/
+
       - name: Build
         run: |
+          echo "Starting Hugo build..."
           hugo --minify --baseURL "https://tristanbao.github.io/insightdata/"
+          echo "Build complete. Checking public directory..."
+          ls -la public/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: public
+          retention-days: 1
 
   deploy:
     environment:
