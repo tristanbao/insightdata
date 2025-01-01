@@ -40,19 +40,23 @@ jobs:
           node-version: '18'
           
       - name: Install dependencies
-        run: npm install
-        
+        run: |
+          cp themes/tella/package.json .
+          cp themes/tella/tailwind.config.js .
+          cp themes/tella/postcss.config.js .
+          npm install
+          mkdir -p assets/css
+          cp themes/tella/assets/css/style.css assets/css
+          
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
           HUGO_VERSION: '0.110.0'
-          HUGO_THEMESDIR: themes
         run: |
           echo "Starting Hugo build..."
           hugo version
-          echo "Theme contents:"
-          ls -la themes/tella/layouts/
-          HUGO_ENV=production hugo --gc --minify --themesDir themes/ --theme tella --baseURL "${{ steps.pages.outputs.base_url }}/"
+          npm run build
+          HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
