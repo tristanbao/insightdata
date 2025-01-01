@@ -1,0 +1,92 @@
+[server]
+timeout = "60s"
+
+#baseURL = "http://localhost:1313/"
+baseURL = "https://tristanbao.github.io/insigtdata/"
+title = "Insight Data Enterprise Consulting"
+author = "Insight Data"
+languageCode = "zh-cn"
+DefaultContentLanguage = "zh-cn"
+enableInlineShortcodes = true
+theme = "tella"
+enableRobotsTXT = true
+
+# Please enable this feature if the site is available in Japanese, Chinese or Korean.
+hasCJKLanguage = true
+
+# If you're using Google Analytics, you can enable this feature.
+#googleAnalytics = "UA-12345678-1"
+
+# Disqus Comment System
+#disqusShortname = ""
+
+[params]
+
+  showBlog = true
+  mainSections = ['blog']
+
+  googleFonts = true
+
+  [params.logo]
+    main = "/img/logo/logo.png"
+    alt = "Insight Data Logo"
+
+    # The size parameter is the class name of tailwindcss
+    # https://tailwindcss.com/
+    size = "h-14"
+
+  [params.site]
+    name = "Insight Data"
+
+  [params.icon]
+    #If you want to use FontAwesome, set this parameter to true.
+    fontawesome = true
+
+  [params.homepage_meta_tags]
+    meta_description = "观水有术，必观其澜，以数据和AI驱动业务洞察"
+    meta_og_title = "Insight Data"
+    meta_og_type = "website"
+    meta_og_url = "https://tella.pages.dev"
+    meta_og_image = "https://raw.githubusercontent.com/opera7133/tella/master/images/tn.png"
+    meta_og_description = "观水有术，必观其澜，以数据和AI驱动业务洞察"
+    meta_twitter_card = "summary_large_image"
+    meta_twitter_site = "@username"
+    meta_twitter_creator = "@username"
+
+[menu]
+
+  [[menu.main]]
+    identifier = "products"
+    name = "产品服务"
+    url = "/products/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "观点洞察"
+    url = "/blog/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "case"
+    name = "成功案例"
+    url = "/case/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "contact"
+    name = "联系我们"
+    url = "/contact/"
+    weight = 4
+
+  # Footer Menu
+  [[menu.footer]]
+    name = "Home"
+    url = "/"
+      weight = 1
+
+  [[menu.footer]]
+    name = "Github"
+    url = "https://github.com/opera7133/tella"
+    pre = "<i class='icon-github text-2xl'></i>"
+      weight = 2

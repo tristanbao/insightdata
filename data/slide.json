@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Transform your business with the power of data..",
+    "image": "img/slide/slide01.jpg",
+    "color": "text-black"
+  },
+  {
+    "title": "Unlock the power of your data.",
+    "image": "img/slide/slide02.jpg",
+    "color": "text-white"
+  },
+  {
+    "title": "In God we trust, all others bring data.",
+    "image": "img/slide/slide03.jpg",
+    "color": "text-white"
+  }
+]

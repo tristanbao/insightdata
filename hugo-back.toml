@@ -1,0 +1,4 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-cn'
+title = 'Insight Data Enterprise Consulting'
+theme = 'tella'
