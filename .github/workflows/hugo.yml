@@ -33,10 +33,19 @@ jobs:
         with:
           hugo-version: '0.110.0'
           extended: true
-          
+      
+      - name: Clean public directory
+        run: rm -rf public
+
       - name: Build
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
         run: |
-          hugo --minify --baseURL "https://tristanbao.github.io/insightdata/"
+          hugo --gc --minify --baseURL "https://tristanbao.github.io/insightdata/"
+          echo "Build complete, checking output:"
+          ls -la public/
+          cat public/index.html || echo "index.html not found"
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
