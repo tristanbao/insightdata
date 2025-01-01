@@ -52,10 +52,17 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Starting Hugo build..."
-          hugo -v --debug \
+          pwd
+          echo "Current directory contents:"
+          ls -la
+          echo "Theme contents:"
+          ls -la themes/tella/
+          echo "Layouts directory:"
+          ls -la layouts/
+          hugo -v --debug --logLevel debug \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
-          echo "Build complete. Checking public directory..."
+          echo "Build complete. Checking public directory:"
           ls -la public/
 
       - name: Upload Pages artifact
