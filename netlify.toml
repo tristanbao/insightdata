@@ -5,6 +5,18 @@ command = "hugo"
 [build.environment]
 HUGO_VERSION = "0.110.0"
 
+# 强制 HTTPS
+[[redirects]]
+  from = "http://*"
+  to = "https://:splat"
+  status = 301
+  force = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
 [context.production.environment]
 HUGO_ENV = "production"
 HUGO_ENABLEGITINFO = "true"

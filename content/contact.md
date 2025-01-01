@@ -14,7 +14,7 @@ draft: false
 
 ## 在线留言
 
-<form action="https://formspree.io/f/your-form-id" method="POST" class="max-w-lg mx-auto">
+<form name="contact" method="POST" data-netlify="true">
   <div class="mb-4">
     <label for="name" class="block text-gray-700 font-bold mb-2">姓名</label>
     <input type="text" id="name" name="name" required

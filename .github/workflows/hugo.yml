@@ -57,11 +57,16 @@ jobs:
           ls -la
           echo "Theme contents:"
           ls -la themes/tella/
-          echo "Layouts directory:"
-          ls -la layouts/
-          hugo -v --debug --logLevel debug \
+          echo "Theme layouts:"
+          ls -la themes/tella/layouts/
+          echo "Content directory:"
+          ls -la content/
+          echo "Running Hugo with verbose output..."
+          HUGO_LOG_LEVEL=debug hugo --verbose --debug \
             --minify \
-            --baseURL "${{ steps.pages.outputs.base_url }}/"
+            --baseURL "${{ steps.pages.outputs.base_url }}/" 2>&1 | tee hugo.log
+          echo "Hugo log file contents:"
+          cat hugo.log
           echo "Build complete. Checking public directory:"
           ls -la public/
 
