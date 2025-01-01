@@ -72,7 +72,3 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4 
 
-# 添加 Node.js 相关忽略规则
-echo "node_modules/" >> .gitignore
-echo "resources/_gen/" >> .gitignore
-echo "public/" >> .gitignore
