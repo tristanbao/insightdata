@@ -37,12 +37,13 @@ jobs:
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
+          HUGO_VERSION: '0.110.0'
         run: |
           echo "Starting Hugo build..."
           hugo version
           echo "Theme contents:"
           ls -la themes/tella/layouts/
-          hugo --gc --minify --themesDir themes/ --theme tella --baseURL "${{ steps.pages.outputs.base_url }}/"
+          HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
