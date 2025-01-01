@@ -34,6 +34,14 @@ jobs:
           hugo-version: '0.110.0'
           extended: true
 
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: Install dependencies
+        run: npm install
+        
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
@@ -63,3 +71,8 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4 
+
+# 添加 Node.js 相关忽略规则
+echo "node_modules/" >> .gitignore
+echo "resources/_gen/" >> .gitignore
+echo "public/" >> .gitignore
