@@ -40,10 +40,9 @@ jobs:
         run: |
           echo "Starting Hugo build..."
           hugo version
-          echo "Checking theme directory:"
-          ls -la themes/tella
-          echo "Building site..."
-          HUGO_LOG_LEVEL=debug hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          echo "Theme contents:"
+          ls -la themes/tella/layouts/
+          hugo --gc --minify --themesDir themes/ --theme tella --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
