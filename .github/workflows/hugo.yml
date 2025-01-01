@@ -52,7 +52,7 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Starting Hugo build..."
-          hugo \
+          hugo -v --debug \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/"
           echo "Build complete. Checking public directory..."
