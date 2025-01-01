@@ -9,6 +9,7 @@ languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
 enableInlineShortcodes = true
 theme = "tella"
+themesDir = "themes"
 enableRobotsTXT = true
 
 # Please enable this feature if the site is available in Japanese, Chinese or Korean.
