@@ -41,12 +41,11 @@ jobs:
           
       - name: Install dependencies
         run: |
-          cp themes/tella/package.json .
-          cp themes/tella/tailwind.config.js .
-          cp themes/tella/postcss.config.js .
+          cp themes/tella/exampleSite/package.json .
+          cp themes/tella/exampleSite/tailwind.config.js .
+          cp themes/tella/exampleSite/postcss.config.js .
+          
           npm install
-          mkdir -p assets/css
-          cp themes/tella/assets/css/style.css assets/css
           
       - name: Build
         env:
