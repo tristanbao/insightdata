@@ -41,10 +41,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          cp themes/tella/exampleSite/package.json .
-          cp themes/tella/exampleSite/tailwind.config.js .
-          cp themes/tella/exampleSite/postcss.config.js .
-          
+         
           npm install
           
       - name: Build
