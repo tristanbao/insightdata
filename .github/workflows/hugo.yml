@@ -32,12 +32,19 @@ jobs:
 
       - name: Build
         run: |
+          echo "Current directory:"
+          pwd
+          echo "Directory contents:"
+          ls -la
+          echo "Building site..."
           hugo --minify
+          echo "Build complete. Public directory contents:"
+          ls -la public/
           
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./public
+          path: public
 
   deploy:
     environment:
