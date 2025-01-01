@@ -45,14 +45,14 @@ jobs:
           hugo --gc --minify --baseURL "https://tristanbao.github.io/insightdata/"
           echo "Build complete, checking output:"
           ls -la public/
-          cat public/index.html || echo "index.html not found"
+          
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
         
       - name: Upload artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: github-pages
           path: ./public
-          retention-days: 1
 
   deploy:
     environment:
@@ -63,4 +63,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4 
+        uses: actions/deploy-pages@v3 
