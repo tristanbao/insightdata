@@ -35,7 +35,8 @@ jobs:
           extended: true
           
       - name: Build
-        run: hugo --minify
+        run: |
+          hugo --minify --baseURL "https://tristanbao.github.io/insightdata/"
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
