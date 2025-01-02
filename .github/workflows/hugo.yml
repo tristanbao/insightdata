@@ -38,6 +38,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
           
       - name: Install dependencies
         run: |
@@ -45,23 +46,35 @@ jobs:
           ls -la themes/tella/assets/css/
           echo "Main CSS content:"
           cat themes/tella/assets/css/main.css
+          echo "Cleaning npm cache..."
+          npm cache clean --force
           echo "Installing dependencies..."
-          npm install
+          npm ci
           echo "Checking installed versions:"
           npm list tailwindcss
           npm list @tailwindcss/typography
           
-      - name: Build
+      - name: Build CSS
         env:
-          HUGO_ENVIRONMENT: production
-          HUGO_VERSION: '0.110.0'
           NODE_ENV: production
           DEBUG: "*"
         run: |
-          echo "Starting Hugo build..."
-          hugo version
           echo "Building CSS..."
-          NODE_ENV=production npx tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify
+          ./node_modules/.bin/tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify || {
+            echo "CSS build failed. Trying alternative build..."
+            npx -p tailwindcss@3.4.1 tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify
+          }
+          echo "CSS build complete. Checking output:"
+          ls -la themes/tella/assets/css/
+
+      - name: Build Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_VERSION: '0.110.0'
+        run: |
+          echo "Building Hugo site..."
+          hugo version
+          HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
