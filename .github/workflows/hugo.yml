@@ -64,7 +64,6 @@ jobs:
           echo "Building CSS..."
           npm run build || {
             echo "CSS build failed. Checking files..."
-     
             ls -la themes/tella/assets/css/
             exit 1
           }
