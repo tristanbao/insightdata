@@ -64,9 +64,9 @@ jobs:
           
           # 先构建 CSS
           echo "Building CSS..."
-          npm run build || {
+          NODE_ENV=production npm run build || {
             echo "CSS build failed. Checking files..."
-            ls -la themes/tella/assets/css/
+            ls -la assets/css/
             echo "Tailwind config:"
             cat tailwind.config.js
             exit 1
