@@ -28,12 +28,6 @@ jobs:
           submodules: recursive
           fetch-depth: 0
       
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.110.0'
-          extended: true
-
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -42,38 +36,30 @@ jobs:
           
       - name: Install dependencies
         run: |
-          echo "Checking file structure..."
-          ls -la themes/tella/assets/css/
-          echo "Main CSS content:"
-          cat themes/tella/assets/css/main.css
-          echo "Cleaning npm cache..."
-          npm cache clean --force
           echo "Installing dependencies..."
           npm ci
-          echo "Checking installed versions:"
-          npm list tailwindcss
-          npm list @tailwindcss/typography
           
       - name: Build CSS
         env:
           NODE_ENV: production
-          DEBUG: "*"
         run: |
           echo "Building CSS..."
           ./node_modules/.bin/tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify || {
             echo "CSS build failed. Trying alternative build..."
             npx -p tailwindcss@3.4.1 tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify
           }
-          echo "CSS build complete. Checking output:"
-          ls -la themes/tella/assets/css/
+          
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.110.0'
+          extended: true
 
       - name: Build Hugo
         env:
           HUGO_ENVIRONMENT: production
-          HUGO_VERSION: '0.110.0'
         run: |
           echo "Building Hugo site..."
-          hugo version
           HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
