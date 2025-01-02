@@ -44,11 +44,6 @@ jobs:
           # 检查文件结构
           echo "Checking file structure..."
           ls -la themes/tella/assets/css/
-          echo "Content of main.css:"
-          cat themes/tella/assets/css/main.css
-          
-          # 确保目标目录存在
-          mkdir -p themes/tella/assets/css
           
           # 安装依赖
           npm install
@@ -64,11 +59,9 @@ jobs:
           
           # 先构建 CSS
           echo "Building CSS..."
-          NODE_ENV=production npm run build || {
+          npx tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css || {
             echo "CSS build failed. Checking files..."
-            ls -la assets/css/
-            echo "Tailwind config:"
-            cat tailwind.config.js
+            ls -la themes/tella/assets/css/
             exit 1
           }
           
