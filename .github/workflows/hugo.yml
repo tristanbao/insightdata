@@ -61,12 +61,7 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Building Hugo site..."
-          echo "Checking CSS files..."
-          ls -la assets/css/
-          echo "Checking theme layouts..."
-          ls -la themes/tella/layouts/
-          ls -la themes/tella/layouts/_default/
-          HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          HUGO_ENV=production hugo --gc --minify --config config.production.toml --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

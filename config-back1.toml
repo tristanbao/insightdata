@@ -1,5 +1,9 @@
-baseURL = "https://www.insightdata.cn"
-title = "Insight Data"
+[server]
+timeout = "60s"
+
+baseURL = "http://localhost:1313/"
+#baseURL = "https://tristanbao.github.io/insightdata/"
+title = "Insight Data Enterprise Consulting"
 author = "Insight Data"
 languageCode = "zh-cn"
 DefaultContentLanguage = "zh-cn"
@@ -24,12 +28,12 @@ hasCJKLanguage = true
   googleFonts = true
 
   [params.logo]
-    main = "img/logo/logo.png"
+    main = "/img/logo/logo.png"
     alt = "Insight Data Logo"
 
     # The size parameter is the class name of tailwindcss
     # https://tailwindcss.com/
-    size = "h-14"
+    size = "h-12"
 
   [params.site]
     name = "Insight Data"
@@ -39,16 +43,17 @@ hasCJKLanguage = true
     fontawesome = true
 
   [params.homepage_meta_tags]
-    meta_description = "Insight Data"
+    meta_description = "观水有术，必观其澜，以数据和AI驱动业务洞察"
     meta_og_title = "Insight Data"
     meta_og_type = "website"
     meta_og_url = "localhost:1313"
     meta_og_image = "https://raw.githubusercontent.com/opera7133/tella/master/images/tn.png"
-    meta_og_description = "A Hugo Theme for OSSProject, Companies, Organization..."
+    meta_og_description = "观水有术，必观其澜，以数据和AI驱动业务洞察"
     meta_twitter_card = "summary_large_image"
     meta_twitter_site = "@username"
     meta_twitter_creator = "@username"
 
+    
 [menu]
 
   [[menu.main]]
@@ -59,14 +64,14 @@ hasCJKLanguage = true
 
   [[menu.main]]
     identifier = "blog"
-    name = "因赛观察"
+    name = "观点洞察"
     url = "/blog/"
     weight = 2
 
   [[menu.main]]
-    identifier = "about"
+    identifier = "case"
     name = "成功案例"
-    url = "/about/"
+    url = "/case/"
     weight = 3
 
   [[menu.main]]
@@ -79,10 +84,24 @@ hasCJKLanguage = true
   [[menu.footer]]
     name = "Home"
     url = "/"
-      weight = 1
+    weight = 1
 
   [[menu.footer]]
     name = "Github"
     url = "https://github.com/opera7133/tella"
     pre = "<i class='icon-github text-2xl'></i>"
-      weight = 2
+    weight = 2
+      
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[markup.highlight]
+  codeFences = true
+  guessSyntax = false
+  lineNos = true
+  noClasses = false
+  style = "monokai"
+      
