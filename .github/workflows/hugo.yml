@@ -41,32 +41,27 @@ jobs:
           
       - name: Install dependencies
         run: |
-          # 检查文件结构
           echo "Checking file structure..."
           ls -la themes/tella/assets/css/
-          
-          # 安装依赖
+          echo "Main CSS content:"
+          cat themes/tella/assets/css/main.css
+          echo "Installing dependencies..."
           npm install
+          echo "Checking installed versions:"
+          npm list tailwindcss
+          npm list @tailwindcss/typography
           
       - name: Build
         env:
           HUGO_ENVIRONMENT: production
           HUGO_VERSION: '0.110.0'
           NODE_ENV: production
+          DEBUG: "*"
         run: |
           echo "Starting Hugo build..."
           hugo version
-          
-          # 先构建 CSS
           echo "Building CSS..."
-          npx tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css || {
-            echo "CSS build failed. Checking files..."
-            ls -la themes/tella/assets/css/
-            exit 1
-          }
-          
-          # 然后构建 Hugo
-          HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
+          NODE_ENV=production npx tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
