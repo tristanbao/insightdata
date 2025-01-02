@@ -61,7 +61,13 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Building Hugo site..."
+          echo "Checking public directory..."
+          ls -la public/ || true
+          echo "Building with Hugo..."
           HUGO_ENV=production hugo --gc --minify --config config.production.toml --baseURL "${{ steps.pages.outputs.base_url }}/"
+          echo "Build complete. Checking output..."
+          ls -la public/
+          cat public/index.html | head -n 20
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

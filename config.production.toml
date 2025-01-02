@@ -1,6 +1,73 @@
-baseURL = "https://www.insightdata.cn"
+baseURL = "https://tristanbao.github.io/insightdata/"
 title = "Insight Data"
-# ... 其他配置保持不变 ...
+author = "Insight Data"
+languageCode = "zh-cn"
+DefaultContentLanguage = "zh-cn"
+enableInlineShortcodes = true
+theme = "tella"
+enableRobotsTXT = true
+hasCJKLanguage = true
 
 [params]
-  environment = "production" 
+  environment = "production"
+  showBlog = true
+  mainSections = ['blog']
+  googleFonts = true
+
+  [params.logo]
+    main = "img/logo/logo.png"
+    alt = "Insight Data Logo"
+    size = "h-14"
+
+  [params.site]
+    name = "Insight Data"
+
+  [params.icon]
+    fontawesome = true
+
+  [params.homepage_meta_tags]
+    meta_description = "Insight Data"
+    meta_og_title = "Insight Data"
+    meta_og_type = "website"
+    meta_og_url = "https://tristan.github.com/insightdata"
+    meta_og_image = "https://raw.githubusercontent.com/opera7133/tella/master/images/tn.png"
+    meta_og_description = "A Hugo Theme for OSSProject, Companies, Organization..."
+    meta_twitter_card = "summary_large_image"
+    meta_twitter_site = "@username"
+    meta_twitter_creator = "@username"
+
+[menu]
+  [[menu.main]]
+    identifier = "products"
+    name = "产品服务"
+    url = "/products/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "因赛观察"
+    url = "/blog/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "about"
+    name = "成功案例"
+    url = "/about/"
+    weight = 3
+
+  [[menu.main]]
+    identifier = "contact"
+    name = "联系我们"
+    url = "/contact/"
+    weight = 4
+
+  [[menu.footer]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.footer]]
+    name = "Github"
+    url = "https://github.com/opera7133/tella"
+    pre = "<i class='icon-github text-2xl'></i>"
+    weight = 2 
