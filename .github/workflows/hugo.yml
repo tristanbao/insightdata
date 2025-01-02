@@ -44,9 +44,10 @@ jobs:
           NODE_ENV: production
         run: |
           echo "Building CSS..."
-          ./node_modules/.bin/tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify || {
+          mkdir -p assets/css/
+          ./node_modules/.bin/tailwindcss -i ./themes/tella/assets/css/main.css -o ./assets/css/style.css --minify || {
             echo "CSS build failed. Trying alternative build..."
-            npx -p tailwindcss@3.4.1 tailwindcss -i ./themes/tella/assets/css/main.css -o ./themes/tella/assets/css/style.css --minify
+            npx -p tailwindcss@3.4.1 tailwindcss -i ./themes/tella/assets/css/main.css -o ./assets/css/style.css --minify
           }
           
       - name: Setup Hugo
@@ -60,6 +61,11 @@ jobs:
           HUGO_ENVIRONMENT: production
         run: |
           echo "Building Hugo site..."
+          echo "Checking CSS files..."
+          ls -la assets/css/
+          echo "Checking theme layouts..."
+          ls -la themes/tella/layouts/
+          ls -la themes/tella/layouts/_default/
           HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
