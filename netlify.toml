@@ -3,7 +3,7 @@ publish = "public"
 command = "hugo"
 
 [build.environment]
-HUGO_VERSION = "0.141.0"
+HUGO_VERSION = "0.121.1"
 
 # 强制 HTTPS
 [[redirects]]
