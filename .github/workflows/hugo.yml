@@ -41,7 +41,15 @@ jobs:
           
       - name: Install dependencies
         run: |
-         
+          # 检查文件结构
+          echo "Checking file structure..."
+          ls -la themes/tella/exampleSite/assets/css/
+          ls -la themes/tella/assets/css/
+          
+          # 确保目标目录存在
+          mkdir -p themes/tella/assets/css
+          
+          # 安装依赖
           npm install
           
       - name: Build
@@ -51,7 +59,17 @@ jobs:
         run: |
           echo "Starting Hugo build..."
           hugo version
-          npm run build
+          
+          # 先构建 CSS
+          echo "Building CSS..."
+          npm run build || {
+            echo "CSS build failed. Checking files..."
+            ls -la themes/tella/exampleSite/assets/css/
+            ls -la themes/tella/assets/css/
+            exit 1
+          }
+          
+          # 然后构建 Hugo
           HUGO_ENV=production hugo --gc --minify --baseURL "${{ steps.pages.outputs.base_url }}/"
 
       - name: Upload artifact
