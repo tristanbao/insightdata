@@ -1,0 +1,131 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Serif+SC:wght@400;500;600;700&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-neutral-950 text-neutral-100;
+    font-feature-settings: 'rlig' 1, 'calt' 1;
+  }
+
+  ::selection {
+    @apply bg-brand-500/30 text-white;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-neutral-950;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-neutral-700 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-neutral-600;
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply max-w-3xl mx-auto px-6;
+  }
+
+  .container-wide {
+    @apply max-w-6xl mx-auto px-6;
+  }
+
+  .prose-article {
+    @apply text-lg leading-relaxed;
+  }
+
+  .prose-article h1 {
+    @apply text-3xl md:text-4xl font-serif font-bold mt-12 mb-6 text-white;
+  }
+
+  .prose-article h2 {
+    @apply text-2xl md:text-3xl font-serif font-semibold mt-10 mb-4 text-white;
+  }
+
+  .prose-article h3 {
+    @apply text-xl font-serif font-semibold mt-8 mb-3 text-white;
+  }
+
+  .prose-article p {
+    @apply my-5 text-neutral-300;
+  }
+
+  .prose-article ul {
+    @apply my-5 space-y-2 text-neutral-300;
+  }
+
+  .prose-article ol {
+    @apply my-5 space-y-2 text-neutral-300;
+  }
+
+  .prose-article blockquote {
+    @apply border-l-4 border-brand-500 pl-6 my-6 italic text-neutral-400;
+  }
+
+  .prose-article code {
+    @apply bg-neutral-900 px-1.5 py-0.5 rounded text-brand-300 text-base font-mono;
+  }
+
+  .prose-article pre {
+    @apply bg-neutral-900 rounded-lg p-5 my-6 overflow-x-auto;
+  }
+
+  .prose-article pre code {
+    @apply bg-transparent p-0 text-neutral-300;
+  }
+
+  .prose-article a {
+    @apply text-brand-400 hover:text-brand-300 underline underline-offset-2 decoration-brand-500/50 hover:decoration-brand-400 transition-colors;
+  }
+
+  .prose-article hr {
+    @apply border-neutral-800 my-10;
+  }
+
+  .prose-article table {
+    @apply w-full my-6 text-sm;
+  }
+
+  .prose-article th {
+    @apply text-left font-semibold text-neutral-200 border-b border-neutral-800 pb-2;
+  }
+
+  .prose-article td {
+    @apply border-b border-neutral-800 py-2 text-neutral-400;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-neutral-200 to-neutral-400 bg-clip-text text-transparent;
+  }
+
+  .glow-brand {
+    box-shadow: 0 0 40px rgba(90, 110, 249, 0.15);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+
+  .card-hover:hover {
+    @apply -translate-y-1;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+  }
+}

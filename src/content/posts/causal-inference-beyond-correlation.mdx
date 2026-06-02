@@ -1,0 +1,76 @@
+---
+title: 因果推断与机器学习的交汇：超越相关性
+date: "2026-04-28"
+author: InsightData
+description: 探讨因果推断在机器学习中的应用，从 Pearl 的因果阶梯到 DoWhy、 EconML 等工具库，构建数据驱动的决策科学框架。
+category: data-science
+tags: [因果推断, 因果机器学习, 因果图, Causal Inference, 统计推断]
+featured: false
+---
+
+## 相关性不等于因果性
+
+「吸烟导致肺癌」——这个今天看来理所当然的结论，在 1950 年代却引发了长达数十年的学术争议。Fisher 等统计学家坚持认为，吸烟与肺癌的高相关性可能源于某个隐藏的遗传因素，而非因果关系。
+
+这个故事揭示了一个深刻的统计学真相：**观测数据中的相关性是因果关系的必要但不充分证据。**
+
+Judea Pearl 提出的因果阶梯（ladder of causation）将因果推断能力分为三层：
+
+1. **关联（Association）** — P(Y|X)，观察到 X 的条件下 Y 的概率
+2. **干预（Intervention）** — P(Y|do(X))，强制执行 X 时 Y 的概率
+3. **反事实（Counterfactual）** — P(Y_x|X', Y')，假设在 X' 条件下观察到 Y'，那么若当初 X 会怎样
+
+当前的深度学习模型在第一层（关联）上表现卓越，但在第二、第三层上仍有显著不足。这正是因果推断能够填补的空白。
+
+## 为什么机器学习需要因果
+
+机器学习模型本质上是统计模式识别器——它们擅长在训练分布内插值，但泛化能力脆弱：
+
+**分布漂移（Distribution Shift）** — 当输入分布发生变化时，模型性能急剧下降。因果模型因为学到的是「因果机制」而非「表面模式」，对分布变化更鲁棒。
+
+**可解释性** — 理解「模型为什么做出这个决策」比理解「模型做出了什么决策」更难。因果图为模型的决策逻辑提供了语义层面的解释。
+
+**反事实推理** — 「如果我们将价格降低 10%，销量会增加多少？」这类业务问题需要反事实推理能力。
+
+## 因果发现与因果推理
+
+因果推断分为两个方向：
+
+**因果发现（Causal Discovery）** — 从数据中自动学习变量之间的因果结构。PC 算法、FCI 算法、GES 算法是这一领域的经典方法。近期深度学习方法的引入（如 DAG-GNN、NOTEARS）大幅提升了在大规模数据上的适用性。
+
+**因果推理（Causal Inference）** — 在已知因果结构（或部分结构）的前提下，估算因果效应。工具变量（IV）、双重差分（DID）、倾向得分匹配（PSM）、合成控制（Synthetic Control）是计量经济学领域的经典方法。
+
+## DoWhy：Python 因果推断框架
+
+Microsoft Research 开发的 DoWhy 是目前最完整的 Python 因果推断库之一。它的 API 设计遵循「定义问题→识别策略→估算效应→验证」的标准化流程：
+
+```python
+from dowhy import CausalModel
+
+# 1. 定义因果模型
+model = CausalModel(
+    data=df,
+    treatment="price",
+    outcome="sales",
+    common_causes=["competitor_price", "seasonality", "region"]
+)
+
+# 2. 识别因果效应
+identified_estimand = model.identify_effect()
+
+# 3. 估算因果效应（多种方法）
+estimate = model.estimate_effect(
+    identified_estimand,
+    method_name="backdoor.propensity_score_matching"
+)
+
+# 4. 验证因果假设
+refute_results = model.refute_estimate(
+    identified_estimand, estimate,
+    method_name="random_common_cause"
+)
+```
+
+## 结语
+
+因果推断不是要取代机器学习，而是为其补充了一种理解世界的更高维度。当数据科学家从「预测」升级到「决策」时，因果思维是必备的认知框架。
