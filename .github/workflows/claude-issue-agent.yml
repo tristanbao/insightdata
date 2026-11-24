@@ -15,8 +15,8 @@ jobs:
   auto-fix:
     # 安全限制：仅允许仓库所有者/协作者触发，且满足特定标签或 @claude 提及
     if: |
-      (github.event_name == 'issues' && github.event.label.name == 'ai-fix' && github.event.sender.login == github.repository_owner) ||
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') && github.event.comment.author_association == 'OWNER')
+      (github.event_name == 'issues' && (github.event.label.name == 'ai-fix' || github.event.label.name == 'ai-article') && github.actor == 'tristanbao') ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') && github.actor == 'tristanbao')
     runs-on: ubuntu-latest # 若切到海外云主机（方案二），改为 self-hosted
     steps:
       - name: Checkout repository
