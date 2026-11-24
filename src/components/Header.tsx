@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, PenLine } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { CATEGORIES } from '@/lib/types';
 
 const NAV_LINKS = [
@@ -82,13 +82,6 @@ export default function Header() {
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link
-              href="/writing"
-              className="hidden md:flex items-center gap-2 text-sm text-brand-400 hover:text-brand-300 transition-colors border border-brand-500/30 hover:border-brand-500/60 px-3 py-1.5 rounded-lg"
-            >
-              <PenLine className="w-3.5 h-3.5" />
-              写文章
-            </Link>
             <button
               className="md:hidden p-2 text-neutral-400 hover:text-white transition-colors"
               onClick={() => setMenuOpen(!menuOpen)}
