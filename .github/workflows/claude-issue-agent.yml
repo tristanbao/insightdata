@@ -1,0 +1,32 @@
+name: Claude Async Coding Agent
+
+on:
+  issues:
+    types: [labeled]
+  issue_comment:
+    types: [created]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  auto-fix:
+    # 安全限制：仅允许仓库所有者/协作者触发，且满足特定标签或 @claude 提及
+    if: |
+      (github.event_name == 'issues' && github.event.label.name == 'ai-fix' && github.event.sender.login == github.repository_owner) ||
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') && github.event.comment.author_association == 'OWNER')
+    runs-on: ubuntu-latest # 若切到海外云主机（方案二），改为 self-hosted
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Run Claude Code Agent
+        uses: anthropics/claude-code-action@v1
+        with:
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          # 也可以通过参数指定模型或允许执行的测试命令，例如：
+          # allowed_tools: "Bash(npm test),Bash(pytest)"
