@@ -10,7 +10,8 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
-
+  id-token: write
+  
 jobs:
   auto-fix:
     # 安全限制：仅允许仓库所有者/协作者触发，且满足特定标签或 @claude 提及
