@@ -29,6 +29,8 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          claude_args: '--allowedTools "Bash(npm ci),Bash(npm run lint),Bash(npm run build)"'
+          
         env:
           ANTHROPIC_BASE_URL: ${{ secrets.ANTHROPIC_BASE_URL }}
           # 也可以通过参数指定模型或允许执行的测试命令，例如：
